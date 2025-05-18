@@ -1,0 +1,59 @@
+//Test Bench for Or Gate
+
+
+// Method - 1  
+
+
+module or_gate_testbench;
+    reg a, b;
+    wire y;
+
+    // Instantiate the OR gate
+    or_gate dut(.a(a), .b(b), .y(y));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, or_gate_testbench);
+
+        // Apply test vectors
+        a = 0; b = 0; #10;
+        $display("time=%0t: a=%b, b=%b => y=%b", $time, a, b, y);
+
+        a = 0; b = 1; #10;
+        $display("time=%0t: a=%b, b=%b => y=%b", $time, a, b, y);
+
+        a = 1; b = 0; #10;
+        $display("time=%0t: a=%b, b=%b => y=%b", $time, a, b, y);
+
+        a = 1; b = 1; #10;
+        $display("time=%0t: a=%b, b=%b => y=%b", $time, a, b, y);
+
+        $finish;
+    end
+endmodule
+
+
+// Method - 2
+
+module or_gate_testbench;
+    reg a, b;
+    wire y;
+    
+    or_gate dut(a, b, y);
+    
+    initial 
+    begin
+        $dumpfile("dump.vcd");
+        $dumpvars;
+          a=0;b=0;
+      #10 a=0;b=1;
+      #10 a=1;b=0;
+      #10 a=1;b=1;
+      #10 $finish;
+    end
+
+    always @(*) 
+    begin
+        $display("time=%0t Input: a=%b, b=%b, Output: y=%b", $time, a, b, y);
+    end 
+endmodule

@@ -1,0 +1,25 @@
+// Data Flow level Modelling
+
+module xor_gate(input a, input b, output out);
+assign out = a^b;
+endmodule
+
+
+// Behavioral Level Modelling 
+
+module xor_gate(input a, input b, output out);
+reg out;
+always@(a or b or out)
+begin
+if(a==b)
+  out = 1'b0;
+else
+  out = 1'b1;
+end 
+endmodule
+
+// Gate Level Modelling
+
+module xor_gate(input a, input b, output out);
+xor xor_gate(out,a,b);
+endmodule

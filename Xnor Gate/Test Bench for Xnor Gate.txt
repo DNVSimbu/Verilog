@@ -1,0 +1,24 @@
+// Test Bench for xnor Gate
+
+module xnor_gate_testbench;
+
+     reg a,b;
+     wire out;
+
+     xnor_gate dut(a,b,out);
+
+    initial
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars;
+  
+        a=0; b=0; 
+    #10 a=0; b=1; 
+    #10 a=1; b=0; 
+    #10 a=1; b=1; 
+    #10 $finish;
+    end
+    always @(*) begin
+        $display("time=%0t Input: a=%b, b=%b, Output: out=%b", $time, a, b, out);
+    end
+endmodule

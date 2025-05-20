@@ -1,0 +1,31 @@
+// Data Flow level Modelling
+
+module xnor_gate(input a, input b, output out);
+assign out = ~(a^b);
+endmodule
+
+
+// Behavioral Level Modelling 
+
+module xnor_gate(input a, input b, output out);
+reg out;
+always@(a or b or out)
+begin
+if(a==b)
+  out = 1'b1;
+else
+  out = 1'b0;
+end 
+endmodule
+
+// Gate Level Modelling
+
+module xnor_gate(input a, input b, output out);
+wire not_a,not_b;
+wire a_and_b,nota_and_notb;
+not(not_a,a);
+not(not_b,b);
+and(a_and_b,a,b);
+and(nota_and_notb,not_a,not_b);
+or (out,nota_and_notb,a_and_b);
+endmodule

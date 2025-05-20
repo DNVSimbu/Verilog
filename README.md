@@ -1,2 +1,2 @@
-# Verilog using xilinx Vivado
+# Verilog using Xilinx Vivado
 Verilog

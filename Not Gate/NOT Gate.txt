@@ -1,0 +1,22 @@
+// Data Flow level Modelling
+
+module not_gate(input a,output out);
+assign out = ~a;
+endmodule
+
+
+// Behavioral Level Modelling 
+
+module not_gate(input a, output out);
+reg out;
+always@(a)
+begin
+  out = ~a;
+end 
+endmodule
+
+// Gate Level Modelling
+
+module not_gate(input a, output out);
+not not_gate(out,a);
+endmodule

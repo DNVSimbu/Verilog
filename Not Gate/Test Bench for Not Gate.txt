@@ -1,0 +1,24 @@
+// Test Bench for not Gate
+
+module not_gate_testbench;
+
+     reg a;
+     wire out;
+
+     not_gate dut(a,out);
+
+    initial
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars;
+  
+        a=0;   
+    #10 a=1;  
+    #10 a=0;
+    #10 a=1;
+    #10 $finish;
+    end
+    always @(*) begin
+        $display("time=%0t Input: a=%b, b=%b, Output: out=%b", $time, a, b, out);
+    end
+endmodule

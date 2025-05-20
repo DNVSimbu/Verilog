@@ -1,0 +1,25 @@
+// Data Flow level Modelling
+
+module nor_gate(input a, input b, output out);
+assign out = ~(a|b);
+endmodule
+
+
+// Behavioral Level Modelling 
+
+module nor_gate(input a, input b, output out);
+reg out;
+always@(a or b or out)
+begin
+if(a==1'b0 && b==1'b0)
+  out = 1'b1;
+else
+  out = 1'b0;
+end 
+endmodule
+
+// Gate Level Modelling
+
+module nor_gate(input a, input b, output out);
+nor nor_gate(out,a,b);
+endmodule

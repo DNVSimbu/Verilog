@@ -1,0 +1,37 @@
+// Data Flow Level Modelling
+
+module full_adder(input a, b, c, output sum, carry);
+assign sum=a^b^c;
+assign carry=(a&b)|(a&c)|(b&c);
+endmodule
+
+// Behavioral Level Modelling
+
+module full_adder(input a, b, cin, output sum, carry);
+reg sum, carry;
+
+always @(*) begin
+    // Compute sum using XOR logic
+    if ((a ^ b) == 1)
+        sum = ~cin;
+    else
+        sum = cin;
+
+    // Compute carry-out using basic logic
+    if ((a & b) | (b & cin) | (a & cin))
+        carry = 1;
+    else
+        carry = 0;
+end
+endmodule
+
+// Gate Level Modelling
+
+module full_adder(input a,b,cin, output sum, carry);
+wire w1,w2,w3;
+xor xor1_gate(w1,a,b);
+xor xor2_gate(sum,w1,cin);
+and and1_gate(w2,a,b);
+and and2_gate(w3,w1,cin);
+or  or_gate(carry,w2,w3);
+endmodule

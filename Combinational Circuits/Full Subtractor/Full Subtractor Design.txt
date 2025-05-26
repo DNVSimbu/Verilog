@@ -1,0 +1,36 @@
+// Data Flow Level Modelling
+
+module full_subtractor(input a, b, c, output diff, borrow);
+assign diff=a^b^c;
+assign borrow=((~a)&b)|((~a)&c)|(b&c);
+endmodule
+
+// Behavioral Level Modelling
+
+module full_subtractor(input a, b, c, output diff, borrow);
+reg diff, borrow;
+
+always @(*) begin
+    // Difference Logic
+    if ((a ^ b ^ c) == 1)
+        diff = 1'b1;
+    else
+        diff = 1'b0;
+    // Borrow Logic
+    if (((~a) & b) | (b & c) | ((~a) & c))
+        borrow = 1;
+    else
+        borrow = 0;
+end
+endmodule
+
+// Gate Level Modelling
+
+module full_subtractor(input a,b,c, output diff, borrow);
+wire w1,w2,w3;
+xor xor1_gate(w1,a,b);
+xor xor2_gate(diff,w1,c);
+and and1_gate(w2,(~a),b);
+and and2_gate(w3,(~w1),c);
+or  or_gate(borrow,w2,w3);
+endmodule

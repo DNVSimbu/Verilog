@@ -1,0 +1,39 @@
+// Data Flow Level Modelling
+
+module half_subractor(input a,b,output diff,borrow);
+assign diff=a^b;
+assign borrow=(~a)&b;
+endmodule	
+
+// Behavioral Level Modelling
+
+module half_subractor(input a,b, output diff,borrow);
+reg diff, borrow;
+
+always@(a or b )
+begin 
+if((a==1'b0 && b==1'b0)||(a==1'b1 && b==1'b1))
+begin
+ diff = 1'b0;
+ borrow = 1'b0;
+end
+else if(a==1'b0 && b==1'b1)
+begin
+ diff = 1'b1;
+ borrow = 1'b1;
+end
+else
+begin
+ diff = 1'b1;
+ borrow = 1'b0;
+end
+end 
+endmodule
+
+// Gate Level Modelling
+
+module half_subractor(input a,b, output diff,borrow);
+
+xor xor_gate(diff,a,b);
+and and_gate(borrow,(~a),b);
+endmodule
